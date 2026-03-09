@@ -55,11 +55,26 @@ app.post("/auth/login", zValidator("json", loginSchema), async (c) => {
   });
 });
 
-// Protected route — requires valid JWT
+// Protected routes — requires valid JWT
 app.use("/me", jwt({ secret: JWT_SECRET, alg: "HS256" }));
 app.get("/me", (c) => {
   const payload = c.get("jwtPayload");
   return c.json({ success: true, user: payload });
+});
+
+app.use("/posts/*", jwt({ secret: JWT_SECRET, alg: "HS256" }));
+
+// GET /posts — list all posts
+app.get("/posts", (c) => {
+  return c.json({ success: true, posts });
+});
+
+// GET /posts/:id — get single post
+app.get("/posts/:id", (c) => {
+  const id = Number(c.req.param("id"));
+  const post = posts.find((p) => p.id === id);
+  if (!post) return c.json({ success: false, message: "Post not found" }, 404);
+  return c.json({ success: true, post });
 });
 
 export default {
