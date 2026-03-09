@@ -13,6 +13,14 @@ const users = [
   { id: 2, username: "user", password: "user123", role: "user" },
 ];
 
+// Mock post store
+const posts = [
+  { id: 1, title: "Getting Started with Hono", content: "Hono is a fast and lightweight web framework for the Edge.", authorId: 1, createdAt: "2026-03-01T09:00:00Z" },
+  { id: 2, title: "JWT Authentication in Bun", content: "Learn how to secure your API routes using JWT tokens with Bun runtime.", authorId: 1, createdAt: "2026-03-03T12:30:00Z" },
+  { id: 3, title: "Building REST APIs", content: "A step-by-step guide to building clean and scalable REST APIs.", authorId: 2, createdAt: "2026-03-06T08:15:00Z" },
+  { id: 4, title: "Zod Validation Tips", content: "Best practices for validating request bodies using Zod schemas.", authorId: 2, createdAt: "2026-03-08T17:45:00Z" },
+];
+
 const loginSchema = z.object({
   username: z.string().min(1),
   password: z.string().min(1),
